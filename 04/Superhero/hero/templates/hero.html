@@ -54,7 +54,26 @@
         <!-- About Section Content-->
         <div class="row">
             <div class="col-lg-4 ms-auto"><p class="lead">{{ hero.about_1 }}</p></div>
-            <div class="col-lg-4 me-auto"><p class="lead">{{ hero.about_2 }} <br><br> <em>Taken from <a href="{{ about_source }}">{{ hero.about_source }}</a></em></p></div>
+            <div class="col-lg-4 me-auto"><p class="lead">{{ hero.about_2 }} <br><br> <em>Taken from <a href="{{ hero.about_source }}">{{ hero.about_source }}</a></em></p></div>
+        </div>
+        <br><br><br>
+        <div class="row">
+            <div class="col-lg-4 ms-auto">
+                <h4 class="text-uppercase">Strengths</h4>
+                <ul>
+                    {% for s in hero.strengths %}
+                    <li>{{ s }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-lg-4 me-auto">
+                <h4 class="text-uppercase">Weaknesses</h4>
+                <ul>
+                    {% for w in hero.weaknesses %}
+                    <li>{{ w }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 </section>
