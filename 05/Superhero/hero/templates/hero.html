@@ -60,19 +60,15 @@
         <div class="row">
             <div class="col-lg-4 ms-auto">
                 <h4 class="text-uppercase">Strengths</h4>
-                <ul>
-                    {% for s in hero.strengths %}
-                    <li>{{ s }}</li>
-                    {% endfor %}
-                </ul>
+                <p>
+                    {{ hero.strengths }}
+                </p>
             </div>
             <div class="col-lg-4 me-auto">
                 <h4 class="text-uppercase">Weaknesses</h4>
-                <ul>
-                    {% for w in hero.weaknesses %}
-                    <li>{{ w }}</li>
-                    {% endfor %}
-                </ul>
+                <p>
+                    {{ hero.weaknesses }}
+                </p>
             </div>
         </div>
     </div>
