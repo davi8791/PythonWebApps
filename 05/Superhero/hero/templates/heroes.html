@@ -1,0 +1,44 @@
+{% extends 'theme.html' %}
+
+{% block content %}
+
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="#page-top">Superheroes</a>
+    </div>
+</nav>
+<br><br><br><br><br><br>
+<!-- Portfolio Section-->
+<section class="page-section portfolio" id="portfolio">
+    <div class="container">
+        <!-- Portfolio Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Superheroes</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Portfolio Grid Items-->
+        <div class="row justify-content-center">
+
+            {% for h in heroes %}
+
+            <!-- Portfolio Items-->
+            <a href="/hero/{{ h.pk }}" class="col-md-6 col-lg-4 mb-5">
+                <div class="portfolio-item mx-auto" style="width: 400px;">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                    </div>
+                    <img style="width: 400px; height: 400px; object-fit: cover;" src="/static/images/{{ h.image }}" alt="..." />
+                </div>
+            </a>
+
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

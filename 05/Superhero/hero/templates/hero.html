@@ -1,0 +1,81 @@
+{% extends 'theme.html' %}
+
+{% block content %}
+
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="#page-top">{{ hero.hero_name }}</a>
+        <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href=".">Back</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Masthead-->
+<header class="masthead text-white text-center" style="background-color: rgb({{ hero.primary_rgb }});">
+    <div class="container d-flex align-items-center flex-column">
+        <!-- Masthead Avatar Image-->
+        <img class="masthead-avatar mb-5" src=" /static/images/{{ hero.image }} " alt="..." />
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0"> {{ hero.hero_name }} </h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Masthead Subheading-->
+        <p class="masthead-subheading font-weight-light mb-0"> {{ hero.real_name }} </p>
+    </div>
+</header>
+<!-- Quote Section-->
+<section class="page-section text-secondary mb-0">
+    <div class="container">
+        <h2 class="text-secondary text-center"><em>{{ hero.quote }}</em></h2>
+    </div>
+</section>
+<!-- About Section-->
+<section class="page-section text-secondary mb-0" id="about">
+    <div class="container">
+        <!-- About Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary">About</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- About Section Content-->
+        <div class="row">
+            <div class="col-lg-4 ms-auto"><p class="lead">{{ hero.about_1 }}</p></div>
+            <div class="col-lg-4 me-auto"><p class="lead">{{ hero.about_2 }} <br><br> <em>Taken from <a href="{{ hero.about_source }}">{{ hero.about_source }}</a></em></p></div>
+        </div>
+        <br><br><br>
+        <div class="row">
+            <div class="col-lg-4 ms-auto">
+                <h4 class="text-uppercase">Strengths</h4>
+                <ul>
+                    {% for s in hero.strengths %}
+                    <li>{{ s }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-lg-4 me-auto">
+                <h4 class="text-uppercase">Weaknesses</h4>
+                <ul>
+                    {% for w in hero.weaknesses %}
+                    <li>{{ w }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
