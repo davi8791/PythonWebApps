@@ -5,38 +5,24 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Runserver",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/08/Messenger/manage.py",
+            "args": [
+                "runserver"
+            ],
+            "django": true,
+            "justMyCode": true
+        },
+        {
             "name": "Django Test",
             "type": "python",
             "request": "launch",
             "program": "manage.py",
-            "cwd": "${workspaceFolder}/ClassroomDemos/TDD",
+            "cwd": "${workspaceFolder}/08/Messenger",
             "args": [
                 "test"
-            ],
-            "django": true,
-            "justMyCode": true
-        },
-        {
-            "name": "Get Pages",
-            "type": "python",
-            "request": "launch",
-            "program": "manage.py",
-            "cwd": "${workspaceFolder}/ClassroomDemos/TDD",
-            "args": [
-                "pages"
-            ],
-            "django": true,
-            "justMyCode": true
-        },
-        {
-            "name": "Run server",
-            "type": "python",
-            "request": "launch",
-            "program": "manage.py",
-            "cwd": "${workspaceFolder}/ClassroomDemos/TDD",
-            "args": [
-                "runserver",
-                "8001"
             ],
             "django": true,
             "justMyCode": true
