@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, RedirectView, UpdateView
 
-from .models import Hero, Author
+from .models import Hero, Author, Message
 
 
 def list_heroes(author):
@@ -60,17 +60,17 @@ class AuthorDeleteView(LoginRequiredMixin, DeleteView):
 
 
 class HeroListView(ListView):
-    template_name = "heroes.html"
+    template_name = "hero/heroes.html"
     model = Hero
     fields = '__all__'
 
 class HeroDetailView(DetailView):
-    template_name = "hero.html"
+    template_name = "hero/hero.html"
     model = Hero
     fields = '__all__'
 
 class HeroCreateView(LoginRequiredMixin, CreateView):
-    template_name = "add.html"
+    template_name = "hero/add.html"
     model = Hero
     fields = '__all__'
     success_url = reverse_lazy('author_home')
@@ -81,7 +81,7 @@ class HeroCreateView(LoginRequiredMixin, CreateView):
 
 
 class HeroUpdateView(LoginRequiredMixin, UpdateView):
-    template_name = "edit.html"
+    template_name = "hero/edit.html"
     model = Hero
     fields = '__all__'
     success_url = reverse_lazy('author_home')
@@ -89,5 +89,43 @@ class HeroUpdateView(LoginRequiredMixin, UpdateView):
 
 class HeroDeleteView(LoginRequiredMixin, DeleteView):
     model = Hero
-    template_name = 'delete.html'
+    template_name = 'hero/delete.html'
     success_url = reverse_lazy('author_home')
+
+class MessageView(RedirectView):
+    url = reverse_lazy('message_list')
+
+
+class MessageListView(ListView):
+    template_name = 'message/list.html'
+    model = Message
+    context_object_name = 'messages'
+
+
+class MessageDetailView(DetailView):
+    template_name = 'message/detail.html'
+    model = Message
+    context_object_name = 'message'
+
+
+class MessageCreateView(LoginRequiredMixin, CreateView):
+    template_name = "message/add.html"
+    model = Message
+    fields = '__all__'
+
+    def form_valid(self, form):
+        author = Author.objects.get_or_create(user=self.request.user)[0]
+        form.instance.author = author
+        return super().form_valid(form)
+
+
+class MessageUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = "message/edit.html"
+    model = Message
+    fields = '__all__'
+
+
+class MessageDeleteView(LoginRequiredMixin, DeleteView):
+    model = Message
+    template_name = 'message/delete.html'
+    success_url = reverse_lazy('message_list')

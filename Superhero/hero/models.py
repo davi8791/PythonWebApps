@@ -45,3 +45,21 @@ class Hero(models.Model):
         
     def get_absolute_url(self):
         return reverse_lazy('hero_detail', args=[str(self.id)])
+
+class Message(models.Model):
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, editable=False,
+                               related_name='messages_sent')
+    recipient = models.ForeignKey(Author, on_delete=models.CASCADE,
+                                  related_name='messages_received', default='1')
+    title = models.CharField(max_length=100)
+    text = models.TextField()
+
+    @property
+    def messages(self):
+        return Message.objects.filter(author=self.author)
+
+    def __str__(self):
+        return f'{self.title}'
+
+    def get_absolute_url(self):
+        return reverse_lazy('message_detail', args=[str(self.id)])

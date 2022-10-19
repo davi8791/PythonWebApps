@@ -1,9 +1,8 @@
 from django.views.generic import RedirectView
 from django.contrib import admin
-from django.urls import path
 from django.urls import include, path
 
-from hero.views import HeroListView, HeroDetailView, HeroCreateView, HeroUpdateView, HeroDeleteView, AuthorHomeView, AuthorDetailView, AuthorAddView, AuthorUpdateView, AuthorDeleteView, UserUpdateView
+from hero.views import HeroListView, HeroDetailView, HeroCreateView, HeroUpdateView, HeroDeleteView, AuthorHomeView, AuthorDetailView, AuthorAddView, AuthorUpdateView, AuthorDeleteView, UserUpdateView, MessageDeleteView, MessageDetailView, MessageListView, MessageCreateView, MessageUpdateView
 
 
 urlpatterns = [
@@ -24,8 +23,15 @@ urlpatterns = [
     path('hero/',                HeroListView.as_view(),    name='hero_list'),
     path('hero/<int:pk>',        HeroDetailView.as_view(),  name='hero_detail'),
     path('hero/add',             HeroCreateView.as_view(),  name='hero_add'),
-    path('hero/<int:pk>/edit',       HeroUpdateView.as_view(),  name='hero_edit'),
+    path('hero/<int:pk>/edit',   HeroUpdateView.as_view(),  name='hero_edit'),
     path('hero/<int:pk>/delete', HeroDeleteView.as_view(),  name='hero_delete'),
+
+    # Message
+    path('message/',                     MessageListView.as_view(),    name='message_list'),
+    path('message/<int:pk>',             MessageDetailView.as_view(),  name='message_detail'),
+    path('message/add',                  MessageCreateView.as_view(),  name='message_add'),
+    path('message/<int:pk>/',            MessageUpdateView.as_view(),  name='message_edit'),
+    path('message/<int:pk>/delete',      MessageDeleteView.as_view(),  name='message_delete'),
 
 
 ]
