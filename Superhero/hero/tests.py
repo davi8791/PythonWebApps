@@ -2,7 +2,7 @@ from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 
-from .models import Hero, Author, Message
+from .models import Hero, Investigator
 from django.contrib.auth.models import User
 
 test_hero_data = dict(hero_name="test",
@@ -16,9 +16,9 @@ test_hero_data = dict(hero_name="test",
                     weaknesses="test",
                     image="test")
 
-def create_test_author(username=""):
+def create_test_investigator(username=""):
     test_user = User.objects.create(username=username)
-    return Author.objects.create(user=test_user)
+    return Investigator.objects.create(user=test_user)
 
 class HeroAppTest(SimpleTestCase):
     def test_django(self):
@@ -27,24 +27,24 @@ class HeroAppTest(SimpleTestCase):
 
 class DataTest(TestCase):
 
-    def test_author_model(self):
+    def test_investigator_model(self):
 
-        test_author1 = create_test_author("user1")
-        test_author2 = create_test_author("user2")
-        self.assertEqual(len(Author.objects.all()), 2)
-        test_author1.bio = "aha"
-        test_author2.bio = "haha"
-        self.assertEqual(test_author1.bio, "aha")
-        self.assertEqual(test_author2.bio, "haha")
-        test_author2.delete()
-        self.assertEqual(len(Author.objects.all()), 1)
+        test_investigator1 = create_test_investigator("user1")
+        test_investigator2 = create_test_investigator("user2")
+        self.assertEqual(len(Investigator.objects.all()), 2)
+        test_investigator1.bio = "aha"
+        test_investigator2.bio = "haha"
+        self.assertEqual(test_investigator1.bio, "aha")
+        self.assertEqual(test_investigator2.bio, "haha")
+        test_investigator2.delete()
+        self.assertEqual(len(Investigator.objects.all()), 1)
 
     def test_hero_model(self):
 
-        test_author = create_test_author()
+        test_investigator = create_test_investigator()
         self.assertEqual(len(Hero.objects.all()), 0)
-        hi = Hero.objects.create(author=test_author, hero_name='Title 1')
-        Hero.objects.create(author=test_author, hero_name='Title 2')
+        hi = Hero.objects.create(investigator=test_investigator, hero_name='Title 1')
+        Hero.objects.create(investigator=test_investigator, hero_name='Title 2')
         self.assertEqual(len(Hero.objects.all()), 2)
         a = Hero.objects.get(pk=2)
         self.assertEqual(a.hero_name, 'Title 2')
@@ -70,8 +70,8 @@ class HeroViewTest(ViewTest):
     
     def test_hero_detail_view(self):
         user = self.login()
-        author = Author.objects.create(user=user)
-        Hero.objects.create(author=author, hero_name='title')
+        investigator = Investigator.objects.create(user=user)
+        Hero.objects.create(investigator=investigator, hero_name='title')
         response = self.client.get(reverse("hero_detail", args='1'))
         self.assertEqual(response.status_code, 200)
 
@@ -82,15 +82,15 @@ class HeroViewTest(ViewTest):
     
     def test_hero_edit_view(self):
         user = self.login()
-        author = Author.objects.create(user=user)
-        Hero.objects.create(author=author, hero_name='title')
+        investigator = Investigator.objects.create(user=user)
+        Hero.objects.create(investigator=investigator, hero_name='title')
         self.client.post(reverse("hero_edit", args='1'), test_hero_data)
         self.assertEqual(Hero.objects.all()[0].hero_name, "test")
 
     def test_hero_delete_view(self):
         user = self.login()
-        author = Author.objects.create(user=user)
-        Hero.objects.create(author=author, hero_name='title')
+        investigator = Investigator.objects.create(user=user)
+        Hero.objects.create(investigator=investigator, hero_name='title')
         self.client.post(reverse("hero_delete", args='1'))
         self.assertEqual(len(Hero.objects.all()), 0)
 

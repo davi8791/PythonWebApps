@@ -2,22 +2,19 @@ from django.views.generic import RedirectView
 from django.contrib import admin
 from django.urls import include, path
 
-from hero.views import HeroListView, HeroDetailView, HeroCreateView, HeroUpdateView, HeroDeleteView, AuthorHomeView, AuthorDetailView, AuthorAddView, AuthorUpdateView, AuthorDeleteView, UserUpdateView, MessageDeleteView, MessageDetailView, MessageListView, MessageCreateView, MessageUpdateView
+from hero.views import HeroListView, HeroDetailView, HeroCreateView, HeroUpdateView, HeroDeleteView, InvestigatorHomeView, InvestigatorDetailView, InvestigatorAddView, InvestigatorUpdateView, InvestigatorDeleteView, UserUpdateView
 
 
 urlpatterns = [
 
-    # Accounts
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/<int:pk>/',          UserUpdateView.as_view(),  name='user_edit'),
 
-    # Author
-    path('',                           RedirectView.as_view(url='author/home')),
-    path('author/home',                AuthorHomeView.as_view(),    name='author_home'),
-    path('author/<int:pk>',            AuthorDetailView.as_view(),  name='author_detail'),
-    path('author/add/',                AuthorAddView.as_view(),     name='author_add'),
-    path('author/<int:pk>/',           AuthorUpdateView.as_view(),  name='author_edit'),
-    path('author/<int:pk>/delete',     AuthorDeleteView.as_view(),  name='author_delete'),
+    # Investigator
+    path('',                           RedirectView.as_view(url='investigator/home')),
+    path('investigator/home',                InvestigatorHomeView.as_view(),    name='investigator_home'),
+    path('investigator/<int:pk>',            InvestigatorDetailView.as_view(),  name='investigator_detail'),
+    path('investigator/<int:pk>/',           InvestigatorUpdateView.as_view(),  name='investigator_edit'),
+    path('investigator/<int:pk>/delete',     InvestigatorDeleteView.as_view(),  name='investigator_delete'),
 
     # Hero
     path('hero/',                HeroListView.as_view(),    name='hero_list'),
@@ -26,12 +23,8 @@ urlpatterns = [
     path('hero/<int:pk>/edit',   HeroUpdateView.as_view(),  name='hero_edit'),
     path('hero/<int:pk>/delete', HeroDeleteView.as_view(),  name='hero_delete'),
 
-    # Message
-    path('message/',                     MessageListView.as_view(),    name='message_list'),
-    path('message/<int:pk>',             MessageDetailView.as_view(),  name='message_detail'),
-    path('message/add',                  MessageCreateView.as_view(),  name='message_add'),
-    path('message/<int:pk>/',            MessageUpdateView.as_view(),  name='message_edit'),
-    path('message/<int:pk>/delete',      MessageDeleteView.as_view(),  name='message_delete'),
+    # Login/Sign Up
+    path('signup/',                InvestigatorAddView.as_view(),     name='sign_up'),
 
 
 ]
