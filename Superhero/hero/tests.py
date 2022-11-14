@@ -54,7 +54,6 @@ class DataTest(TestCase):
         a.delete()
         self.assertEqual(len(Hero.objects.all()), 1)
 
-
 class ViewTest(TestCase):
 
     def login(self):

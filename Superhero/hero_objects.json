@@ -1,0 +1,44 @@
+[
+    {
+        "id": 13,
+        "investigator_id": 3,
+        "hero_name": "k",
+        "real_name": "k",
+        "about_1": "k\r\nk",
+        "about_2": "k",
+        "about_source": "k",
+        "quote": "k",
+        "primary_rgb": "k",
+        "strengths": "k",
+        "weaknesses": "k",
+        "image": "k"
+    },
+    {
+        "id": 14,
+        "investigator_id": 3,
+        "hero_name": "he",
+        "real_name": "jt",
+        "about_1": "jdt",
+        "about_2": "djtdjtdfj",
+        "about_source": "dtjd",
+        "quote": "dtjdt",
+        "primary_rgb": "dtjtd",
+        "strengths": "dtfj",
+        "weaknesses": "dfjt",
+        "image": "dftj"
+    },
+    {
+        "id": 15,
+        "investigator_id": 3,
+        "hero_name": "hs",
+        "real_name": "shrtr",
+        "about_1": "shrsh",
+        "about_2": "rshr",
+        "about_source": "shrs",
+        "quote": "shr",
+        "primary_rgb": "shrs",
+        "strengths": "hrshr",
+        "weaknesses": "shrsr",
+        "image": "shrshr"
+    }
+]
