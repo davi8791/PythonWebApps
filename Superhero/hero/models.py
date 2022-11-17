@@ -25,6 +25,11 @@ class Investigator(models.Model):
     def get_me(user):
         return Investigator.objects.get_or_create(user=user)[0]
 
+def get_upload(instance, filename):
+    # if instance.folder:
+    #     return f'images/{instance.folder}/{filename}'
+    return f'images/{filename}'
+
 # Create your models here.
 class Hero(models.Model):
     investigator = models.ForeignKey(Investigator, on_delete=models.CASCADE, editable=False)
@@ -38,7 +43,7 @@ class Hero(models.Model):
     primary_rgb = models.CharField(max_length=11,default="")
     strengths = models.CharField(max_length=500,default="")
     weaknesses = models.CharField(max_length=500,default="")
-    image = models.CharField(max_length=500,default="")
+    image = models.ImageField(null=True, blank=True, upload_to=get_upload)
 
     def __str__(self):
         return f'{self.hero_name}'

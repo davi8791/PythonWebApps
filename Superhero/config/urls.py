@@ -1,6 +1,8 @@
 from django.views.generic import RedirectView
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls.static import static
+from django.conf import settings
 
 from hero.views import HeroListView, HeroDetailView, HeroCreateView, HeroUpdateView, HeroDeleteView, InvestigatorHomeView, InvestigatorDetailView, InvestigatorAddView, InvestigatorUpdateView, InvestigatorDeleteView, UserUpdateView
 
@@ -27,4 +29,4 @@ urlpatterns = [
     path('signup/',                InvestigatorAddView.as_view(),     name='sign_up'),
 
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
