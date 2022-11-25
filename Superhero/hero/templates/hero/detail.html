@@ -42,22 +42,11 @@
             <div class="col-lg-4 me-auto"><p class="lead">{{ hero.about_2 }} <br><br> <em>Taken from <a href="{{ hero.about_source }}">{{ hero.about_source }}</a></em></p></div>
         </div>
         <br><br><br>
+
+        {% include '_cards.html' %}
+
         <div class="row">
-            <div class="col-lg-4 ms-auto">
-                <h4 class="text-uppercase">Strengths</h4>
-                <p>
-                    {{ hero.strengths }}
-                </p>
-            </div>
-            <div class="col-lg-4 me-auto">
-                <h4 class="text-uppercase">Weaknesses</h4>
-                <p>
-                    {{ hero.weaknesses }}
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <b>By {{ hero.author.user.username }}</b>
+            <b>By {{ hero.investigator.user.username }}</b>
         </div>
         
     </div>

@@ -1,0 +1,26 @@
+<h1 class="text-primary">Author Details</h1>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg">
+
+                <table class="table">
+                    <tr>
+                        <td><b>User ID:</b></td>
+                        <td>
+                            {{ object.user.username }}</a>
+                    </tr>
+                    <tr>
+                        <td><b>Biography</b> </td>
+                        <td>{{ object.bio }}</td>
+                    </tr>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <a href="/author/{{ object.pk }}/" class="btn btn-success m-5">Edit Author</a>
+    <a href="/author/{{ object.pk }}/delete" class="btn btn-success m-5">Delete Author</a>
