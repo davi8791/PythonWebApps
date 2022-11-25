@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from pathlib import Path
 from csv import reader
-from hero.models import Hero, Investigator
+from hero.models import Hero, Investigator, Photo
 
 
 class Command(BaseCommand):
@@ -26,6 +26,6 @@ def load_data():
                 primary_rgb=i[7], 
                 strengths=i[8], 
                 weaknesses=i[9], 
-                image=i[10], 
+                image=Photo.objects.filter(pk=int(i[10]))[10], 
                 )
     

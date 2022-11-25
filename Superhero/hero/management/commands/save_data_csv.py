@@ -22,7 +22,7 @@ def save_data():
             hero.primary_rgb,
             hero.strengths,
             hero.weaknesses,
-            hero.image
+            hero.image.pk
         ] for hero in Hero.objects.all()]
 
     with open('hero_objects.csv', 'w', newline='') as f:
