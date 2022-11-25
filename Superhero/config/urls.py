@@ -4,7 +4,7 @@ from django.urls import include, path
 from django.conf.urls.static import static
 from django.conf import settings
 
-from hero.views import HeroListView, HeroDetailView, HeroCreateView, HeroUpdateView, HeroDeleteView, InvestigatorHomeView, InvestigatorDetailView, InvestigatorAddView, InvestigatorUpdateView, InvestigatorDeleteView, UserUpdateView
+from hero.views import PhotoDetailView, PhotoCreateView, PhotoUpdateView, PhotoDeleteView, PhotoListView, HeroListView, HeroDetailView, HeroCreateView, HeroUpdateView, HeroDeleteView, InvestigatorHomeView, InvestigatorDetailView, InvestigatorAddView, InvestigatorUpdateView, InvestigatorDeleteView, UserUpdateView
 
 
 urlpatterns = [
@@ -24,6 +24,13 @@ urlpatterns = [
     path('hero/add',             HeroCreateView.as_view(),  name='hero_add'),
     path('hero/<int:pk>/edit',   HeroUpdateView.as_view(),  name='hero_edit'),
     path('hero/<int:pk>/delete', HeroDeleteView.as_view(),  name='hero_delete'),
+
+    # Photos
+    path('photo/photos', PhotoListView.as_view(), name='photos'),
+    path('photo/<int:pk>',        PhotoDetailView.as_view(),  name='photo_detail'),
+    path('photo/add',             PhotoCreateView.as_view(),  name='photo_add'),
+    path('photo/<int:pk>/edit',   PhotoUpdateView.as_view(),  name='photo_edit'),
+    path('photo/<int:pk>/delete', PhotoDeleteView.as_view(),  name='photo_delete'),
 
     # Login/Sign Up
     path('signup/',                InvestigatorAddView.as_view(),     name='sign_up'),

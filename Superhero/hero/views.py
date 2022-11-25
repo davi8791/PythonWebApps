@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, RedirectView, UpdateView
-from .models import Hero, Investigator
+from .models import Hero, Investigator, Photo
 
 
 def list_heroes(investigator):
@@ -94,7 +94,46 @@ class HeroUpdateView(LoginRequiredMixin, UpdateView):
     fields = '__all__'
     success_url = reverse_lazy('investigator_home')
 
+class PhotoDetailView(DetailView):
+    template_name = 'photo/detail.html'
+    model = Photo
+    context_object_name = 'photo'
+
+class PhotoCreateView(CreateView):
+    template_name = 'photo/add.html'
+    model = Photo
+    fields = '__all__'
+
 class HeroDeleteView(LoginRequiredMixin, DeleteView):
     model = Hero
     template_name = 'hero/delete.html'
     success_url = reverse_lazy('investigator_home')
+
+class PhotoUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = 'photo/edit.html'
+    model = Photo
+    fields = '__all__'
+
+class PhotoDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'photo/delete.html'
+    model = Photo
+    success_url = reverse_lazy('photos')
+
+class PhotoListView(ListView):
+    template_name = 'photo/photos.html'
+    model = Photo
+
+    def get_context_data(self, **kwargs):
+        kwargs = super().get_context_data(**kwargs)
+        photos = Photo.objects.all()
+        photos_list = []
+        first = True
+        for i in photos:
+            if first:
+                photos_list.append(dict(image_url=i.image_url, pk=i.pk, label=i.title, active='active'))
+                first = False
+            else:
+                photos_list.append(dict(image_url=i.image_url, pk=i.pk, label=i.title, active=''))
+
+        kwargs.update(carousel=photos_list)
+        return kwargs

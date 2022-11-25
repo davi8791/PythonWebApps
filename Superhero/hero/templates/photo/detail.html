@@ -1,0 +1,16 @@
+{% extends 'theme.html' %}
+
+{% block content %}
+
+<section class="page-section text-secondary mb-0">
+    <div class="container">
+        <h2 class="page-section-heading text-center text-uppercase text-secondary">{{ photo.label }}</h2>
+        <img src="/media/{{ photo.image_url }}" width="600">
+    </div>
+</section>
+
+<p>
+    <a href="{{ photo.pk }}/edit" class="btn btn-success m-5">Edit</a>
+</p>
+
+{% endblock content %}
