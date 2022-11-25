@@ -154,10 +154,3 @@ class HeroDeleteView(LoginRequiredMixin, DeleteView):
     model = Hero
     template_name = 'hero/delete.html'
     success_url = reverse_lazy('investigator_home')
-
-class TabsView(TemplateView):
-    template_name = 'tabs.html'
-
-    def get_context_data(self, **kwargs):
-        tabs = tabs_data()
-        return dict(title='Tab View', tabs=tabs)
