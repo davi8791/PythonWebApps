@@ -1,15 +1,10 @@
 from .models import Hero
-from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, RedirectView, UpdateView
-
 from .models import Hero, Investigator
-from csv import reader
-from markdown import markdown
-from os.path import exists
 
 
 def list_heroes(investigator):
@@ -17,57 +12,6 @@ def list_heroes(investigator):
 
 def get_investigator(user):
     return Investigator.objects.get_or_create(user=user)[0]
-
-def lorem(num_words):
-    text = open('Documents/lorem.txt').read()
-    text = ' '.join(text.split(' ')[: num_words])
-    return f'#### Lorem {num_words}\n\n' + text
-
-def card_data(title="Random Card", body=None, color='bg-primary text-light', width='col-lg-12', link=None):
-    if not body:
-        body = lorem(400)
-    html = markdown(body)
-    return dict(title=title, header=title, body=html, color=color, width=width)
-
-def cards_data():
-    return [
-        card_data(),
-        card_data("Card Two",   lorem(50),  "bg-warning text-dark", 'col-lg-6'),
-        card_data("Card Three", lorem(150), "bg-success text-light", 'col-lg-6'),
-        card_data("Card Four",  lorem(20),  "bg-danger text-light",  'col-lg-6'),
-    ]
-
-def tabs_data():
-
-    def options(i, tab, selected):
-        data = tab
-        if selected:
-            data.update(dict(name=f'tab{i}', active='active', show='show', selected='true'))
-        else:
-            data.update(dict(name=f'tab{i}', active='', show='', selected='false'))
-        return data
-
-    def set_options(tabs):
-        return [options(i, tab, i == 0) for i, tab in enumerate(tabs)]
-
-    def create_pane_1():
-        data = card_data(title="Investigator", body='Investigator')
-        data['cards'] = cards_data()
-        return data
-
-    def create_pane_2():
-        data = card_data(title="My Superheroes", body='My Superheroes')
-        data['cards'] = cards_data()
-        return data
-
-    def create_tabs():
-        return [
-            create_pane_1(),
-            create_pane_2(),
-        ]
-
-    return set_options(create_tabs())
-
 
 class InvestigatorHomeView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):

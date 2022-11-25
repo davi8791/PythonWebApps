@@ -1,6 +1,7 @@
 from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from django.core.management import call_command
 
 from .models import Hero, Investigator
 from django.contrib.auth.models import User
@@ -23,7 +24,6 @@ def create_test_investigator(username=""):
 class HeroAppTest(SimpleTestCase):
     def test_django(self):
         self.assertTrue(True)
-
 
 class DataTest(TestCase):
 
@@ -53,6 +53,25 @@ class DataTest(TestCase):
         self.assertEqual(a.hero_name, 'New Title')
         a.delete()
         self.assertEqual(len(Hero.objects.all()), 1)
+    
+    def test_json(self):
+
+        test_investigator = create_test_investigator()
+        Hero.objects.create(investigator=test_investigator, hero_name='Title 1')
+        call_command('save_data_json')
+        Hero.objects.create(investigator=test_investigator, hero_name='Title 2')
+        call_command('load_data_json')
+        self.assertEqual(len(Hero.objects.all()), 1)
+
+    def test_csv(self):
+
+        test_investigator = create_test_investigator()
+        Hero.objects.create(investigator=test_investigator, hero_name='Title 1')
+        call_command('save_data_csv')
+        Hero.objects.create(investigator=test_investigator, hero_name='Title 2')
+        call_command('load_data_csv')
+        self.assertEqual(len(Hero.objects.all()), 1)
+        
 
 class ViewTest(TestCase):
 
