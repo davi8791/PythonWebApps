@@ -1,5 +1,3 @@
-import os
-
 """
 Django settings for config project.
 
@@ -22,15 +20,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-s=_1iu&_%4tse0&o$x&8$ig^7*k@r(mol355*@+g$z+!iqc5nf'
+SECRET_KEY = 'django-insecure-cpv#qv15b%4=$n%e-aei&+_=l&h@jhj7a076aaf)c4@+v0&@&5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# Handle all URL requests made to web server
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
-# Enable data the Profile app
+
+# Application definition
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,16 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
-    'hero',
-    'messenger'
-]    
-
-# On Digital Ocean it will use the Static Server
-# Locally you need to enable the static media server (Images, CSS, Javascript)
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
-
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,52 +73,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-
 DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get("DATABASE_ENGINE"),
-        "NAME": os.environ.get("DATABASE_NAME"),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
-POSTGRES_DB = os.environ.get("POSTGRES_DB")
-POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
-POSTGRES_USER = os.environ.get("POSTGRES_USER")
-POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
-POSTGRES_PORT = os.environ.get("POSTGRES_PORT")
-
-POSTGRES_READY = (
-    POSTGRES_DB is not None
-    and POSTGRES_PASSWORD is not None
-    and POSTGRES_USER is not None
-    and POSTGRES_HOST is not None
-    and POSTGRES_PORT is not None
-)
-
-if POSTGRES_READY:
-    DATABASES = {
-        'default': {
-            # 'ENGINE': environ.get("DATABASE_ENGINE"),
-            # 'NAME': environ.get("DATABASE_NAME"),
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': POSTGRES_DB,
-            'USER': POSTGRES_USER,
-            'PASSWORD': POSTGRES_PASSWORD,
-            'HOST': POSTGRES_HOST,
-            'PORT': POSTGRES_PORT,
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-
-LOGIN_REDIRECT_URL = '/'
-
-LOGOUT_REDIRECT_URL = '/'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -165,14 +116,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
-STATIC_ROOT = 'static_assets/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Upload location for images
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / "media"

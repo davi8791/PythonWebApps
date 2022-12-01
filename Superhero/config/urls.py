@@ -35,5 +35,7 @@ urlpatterns = [
     # Login/Sign Up
     path('signup/',                InvestigatorAddView.as_view(),     name='sign_up'),
 
+    path('', include('messenger.urls_message'))
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
